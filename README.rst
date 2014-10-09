@@ -20,10 +20,12 @@ Run everything::
     $ make run
 
 Once the containers are started, the Loads broker is available on the local port
-8080 port and the InfluxDB dashboard on the port 8086.
+8080 port and the InfluxDB dashboard on the port 8083.
 
-Check out http://localhost:8086
+Check out http://localhost:8083 and set the host port to 8086, and make sure
+you can connect with root/root.
 
 You can then interact with the broker using the loads client.
 
     $ bin/loads info
+    {"runs": [], "status": 200, "version": "0.1", "success": true}

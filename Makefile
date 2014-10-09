@@ -7,7 +7,7 @@ INSTALL = $(BIN)/pip install --no-deps
 BUILD_DIRS = bin build include lib lib64 man share
 
 
-.PHONY: all test docs build_extras
+.PHONY: all build_influx build_broker build run
 
 all: build
 
@@ -25,4 +25,4 @@ build: $(PYTHON)
 	$(BIN)/pip install circus
 
 run:
-	$(BIN)/circusd -d circus.ini
+	$(BIN)/circusd --daemon circus.ini
