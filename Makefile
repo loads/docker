@@ -23,6 +23,7 @@ build_broker:
 build: $(PYTHON)
 	$(BIN)/pip install git+https://github.com/loads/loads-broker.git
 	$(BIN)/pip install circus
+	docker pull registry
 
 run:
 	$(BIN)/circusd --daemon circus.ini
