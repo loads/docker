@@ -25,7 +25,7 @@ Once the containers are started, the Loads broker is available on the local port
 Check out http://localhost:8083 and set the host port to 8086, and make sure
 you can connect with root/root.
 
-You can then interact with the broker using the loads client.
+You can then interact with the broker using the loads client::
 
     $ bin/loads info
     {"runs": [], "status": 200, "version": "0.1", "success": true}
