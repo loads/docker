@@ -2,6 +2,12 @@
 Docker images
 =============
 
+.. note::
+
+   If you need sudo rights to run docker, make sure you
+   use the -E option to pass the AWS_ environment variables
+
+
 Docker images to build a Loads cluster. Everything is driven by a Makefile.
 
 Build the Docker images::
@@ -9,7 +15,7 @@ Build the Docker images::
     $ make build_influx
     $ make build_broker
 
-Install Circus and the Loads client::
+Install the Loads client::
 
     $ make build
 

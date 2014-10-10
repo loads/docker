@@ -31,8 +31,8 @@ start:
 
 stop:
 	@echo Stopping...
-	-@if [ -f ".influx" ]; then docker stop `cat .influx` ; rm .influx; fi
-	-@if [ -f ".broker" ]; then docker stop `cat .broker` ; rm .broker; fi
-	-@if [ -f ".registry" ]; then docker stop `cat .registry` ; rm .registry; fi
+	-@if [ -f ".influx" ]; then docker stop `cat .influx` ; rm -f .influx; fi
+	-@if [ -f ".broker" ]; then docker stop `cat .broker` ; rm -f .broker; fi
+	-@if [ -f ".registry" ]; then docker stop `cat .registry` ; rm -f .registry; fi
 	@echo Stopped
 
