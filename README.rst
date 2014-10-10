@@ -15,9 +15,9 @@ Install Circus and the Loads client::
 
 Run everything::
 
+    $ export AWS_ACCESS_KEY_ID=xxx
     $ export AWS_SECRET_ACCESS_KEY=xxx
-    $ export AWS_SECRET_ACCESS_KEY=xxx
-    $ make run
+    $ make start
 
 Once the containers are started, the Loads broker is available on the local port
 8080 port and the InfluxDB dashboard on the port 8083.
