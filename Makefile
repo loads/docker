@@ -24,15 +24,15 @@ build: $(PYTHON)
 
 start:
 	@echo Starting...
-	@docker run -d -p 5000:5000 -v $(HERE):/registry-conf -e DOCKER_REGISTRY_CONFIG=/registry-conf/reg-conf.yml -e SETTINGS_FLAVOR=local --cidfile=.registry registry
 	@docker run -d -p 8080:8080 --expose 8080 -e AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) -e AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY) --cidfile=.broker loads/loads-broker
+	@docker run -d -p 5000:5000 -v $(HERE):/registry-conf -e DOCKER_REGISTRY_CONFIG=/registry-conf/reg-conf.yml -e SETTINGS_FLAVOR=local --cidfile=.registry registry
 	@docker run -d -p 8083:8083 -p 8086:8086 --expose 8090 --expose 8099 --cidfile=.influx loads/influx
 	@echo Started.
 
 stop:
 	@echo Stopping...
-	-@if [ -f ".influx" ]; then docker stop `cat .influx` ; rm -f .influx; fi
-	-@if [ -f ".broker" ]; then docker stop `cat .broker` ; rm -f .broker; fi
-	-@if [ -f ".registry" ]; then docker stop `cat .registry` ; rm -f .registry; fi
+	-@if [ -f ".influx" ]; then docker stop `cat .influx` ; docker rm `cat .influx`; rm -f .influx; fi
+	-@if [ -f ".broker" ]; then docker stop `cat .broker` ; docker rm `cat .broker`; rm -f .broker; fi
+	-@if [ -f ".registry" ]; then docker stop `cat .registry` ; docker rm `cat .registry`; rm -f .registry; fi
 	@echo Stopped
 
