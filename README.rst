@@ -10,9 +10,8 @@ Docker images
 
 Docker images to build a Loads cluster. Everything is driven by a Makefile.
 
-Build the Docker images::
+Build the Docker image::
 
-    $ make build_influx
     $ make build_broker
 
 Install the Loads client::
