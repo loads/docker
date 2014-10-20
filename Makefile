@@ -5,7 +5,7 @@ INSTALL = $(BIN)/pip install --no-deps
 BUILD_DIRS = bin build include lib lib64 man share
 
 
-.PHONY: all build_influx build_broker build run
+.PHONY: all build_broker build start stop
 
 all: build
 
@@ -17,7 +17,6 @@ build_broker:
 
 build: $(PYTHON)
 	$(BIN)/pip install git+https://github.com/loads/loads-broker.git
-	docker pull registry
 	docker pull tutum/grafana
 	docker pull tutum/influxdb
 
@@ -26,7 +25,7 @@ build: $(PYTHON)
 
 start:
 	@echo Starting...
-	@docker run -d -p 8086:8086 -p 8084:8084 -e PRE_CREATE_DB="test" -e SSL_SUPPORT=yes tutum/influxdb
+	@docker run -d -p 8086:8086 -p 8083:8083 -e PRE_CREATE_DB="test" --cidfile=.influx tutum/influxdb
 	@docker run -d -p 8080:8080 --expose 8080 -e AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) -e AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY) --cidfile=.broker loads/loads-broker
 	@echo Started.
 
@@ -34,6 +33,5 @@ stop:
 	@echo Stopping...
 	-@if [ -f ".influx" ]; then docker stop `cat .influx` ; docker rm `cat .influx`; rm -f .influx; fi
 	-@if [ -f ".broker" ]; then docker stop `cat .broker` ; docker rm `cat .broker`; rm -f .broker; fi
-	-@if [ -f ".registry" ]; then docker stop `cat .registry` ; docker rm `cat .registry`; rm -f .registry; fi
 	@echo Stopped
 
