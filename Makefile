@@ -28,7 +28,6 @@ start:
 	@echo Starting...
 	@docker run -d -p 8086:8086 -p 8084:8084 -e PRE_CREATE_DB="test" -e SSL_SUPPORT=yes tutum/influxdb
 	@docker run -d -p 8080:8080 --expose 8080 -e AWS_ACCESS_KEY_ID=$(AWS_ACCESS_KEY_ID) -e AWS_SECRET_ACCESS_KEY=$(AWS_SECRET_ACCESS_KEY) --cidfile=.broker loads/loads-broker
-	@docker run -d -p 8088:80 -e HTTP_USER=admin -e HTTP_PASS=admin -e INFLUXDB_HOST=localhost -e INFLUXDB_NAME="test" --cidfile=.grafana tutum/grafana
 	@echo Started.
 
 stop:
@@ -36,6 +35,5 @@ stop:
 	-@if [ -f ".influx" ]; then docker stop `cat .influx` ; docker rm `cat .influx`; rm -f .influx; fi
 	-@if [ -f ".broker" ]; then docker stop `cat .broker` ; docker rm `cat .broker`; rm -f .broker; fi
 	-@if [ -f ".registry" ]; then docker stop `cat .registry` ; docker rm `cat .registry`; rm -f .registry; fi
-	-@if [ -f ".grafana" ]; then docker stop `cat .grafana` ; docker rm `cat .grafana`; rm -f .grafana; fi
 	@echo Stopped
 
